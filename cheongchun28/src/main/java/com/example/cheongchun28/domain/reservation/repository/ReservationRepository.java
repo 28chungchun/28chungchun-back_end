@@ -1,4 +1,4 @@
-package com.example.cheongchun28.domain.reservation.repository;
+package repository;
 
-public interface ReservationRepository {
+public interface ReservationRepository extends JpaRepository <Reservation, Long> {
 }
