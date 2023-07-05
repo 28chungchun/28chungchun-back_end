@@ -15,6 +15,8 @@ configurations {
 	compileOnly {
 		extendsFrom annotationProcessor
 	}
+
+
 }
 
 repositories {
@@ -22,14 +24,23 @@ repositories {
 }
 
 dependencies {
-	implementation 'org.springframework.boot:spring-boot-starter-data-jpa'
-	implementation 'org.springframework.boot:spring-boot-starter-security'
+	//Spring web
 	implementation 'org.springframework.boot:spring-boot-starter-web'
-	compileOnly 'org.projectlombok:lombok'
-	runtimeOnly 'org.mariadb.jdbc:mariadb-java-client'
-	annotationProcessor 'org.projectlombok:lombok'
 	testImplementation 'org.springframework.boot:spring-boot-starter-test'
+	//JPA
+	implementation 'org.springframework.boot:spring-boot-starter-data-jpa'
+	//Security
+	implementation 'org.springframework.boot:spring-boot-starter-security'
 	testImplementation 'org.springframework.security:spring-security-test'
+	//Lombok
+	compileOnly 'org.projectlombok:lombok'
+	annotationProcessor 'org.projectlombok:lombok'
+	//MariaDB
+	runtimeOnly 'org.mariadb.jdbc:mariadb-java-client'
+	//JWT
+	implementation 'io.jsonwebtoken:jjwt:0.9.1'
+	//Validation
+	implementation 'org.springframework.boot:spring-boot-starter-validation'
 }
 
 tasks.named('test') {
