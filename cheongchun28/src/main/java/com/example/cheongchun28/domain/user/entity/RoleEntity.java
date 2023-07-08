@@ -1,12 +1,11 @@
 package com.example.cheongchun28.domain.user.entity;
 
 import lombok.Getter;
-import lombok.NoArgsConstructor;
 import lombok.RequiredArgsConstructor;
 
 @Getter
 @RequiredArgsConstructor
-public enum Role {
+public enum RoleEntity {
     ADMIN("ADMIN"),
     MANAGER("MANAGER"),
     EMPLOYEE("EMPLOYEE"),

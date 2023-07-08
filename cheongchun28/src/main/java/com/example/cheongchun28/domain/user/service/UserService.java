@@ -1,7 +1,7 @@
 package com.example.cheongchun28.domain.user.service;
 
 import com.example.cheongchun28.domain.user.dto.UserDto;
-import com.example.cheongchun28.domain.user.entity.User;
+import com.example.cheongchun28.domain.user.entity.UserEntity;
 import com.example.cheongchun28.domain.user.repository.UserRepository;
 import com.example.cheongchun28.global.common.dto.CustomResponseDto;
 import com.example.cheongchun28.global.jwt.JwtUtil;

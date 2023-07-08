@@ -1,6 +1,6 @@
 package com.example.cheongchun28.domain.user.dto;
 
-import com.example.cheongchun28.domain.user.entity.User;
+import com.example.cheongchun28.domain.user.entity.UserEntity;
 import javax.validation.constraints.Email;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.Size;
@@ -28,8 +28,8 @@ public class UserDto {
 
         private String empNumber;
 
-        public User toEntity(String encodePassword) {
-            return new User(this.email, this.password = encodePassword, this.userName, this.profileImage, this.empNumber);
+        public UserEntity toEntity(String encodePassword) {
+            return new UserEntity(this.email, this.password = encodePassword, this.userName, this.profileImage, this.empNumber);
         }
     }
 

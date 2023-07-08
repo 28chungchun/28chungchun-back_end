@@ -19,7 +19,7 @@ import java.util.Collection;
 @Data
 @Entity
 @Table(name = "T_USER")
-public class User implements UserDetails {
+public class UserEntity implements UserDetails {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
@@ -35,7 +35,7 @@ public class User implements UserDetails {
     private LocalDateTime modifiedAt;
 
     @Column(name = "ROLE_SEQUENCE_ID", nullable = false)
-    private Role role;
+    private RoleEntity roleEntity;
 
     @Column(name = "EMAIL", nullable = false)
     private String userEmail;
@@ -55,8 +55,8 @@ public class User implements UserDetails {
     @Column(name = "EMP_NUMBER", nullable = true)
     private String empNumber;
 
-    public User(String userEmail, String password, String userName, String profileImage, String empNumber) {
-        this.role = Role.USER;
+    public UserEntity(String userEmail, String password, String userName, String profileImage, String empNumber) {
+        this.roleEntity = RoleEntity.USER;
         this.userEmail = userEmail;
         this.encodedPassword = password;
         this.userName = userName;
@@ -67,7 +67,7 @@ public class User implements UserDetails {
 
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
-        String authority = this.role.getRole();
+        String authority = this.roleEntity.getRole();
         SimpleGrantedAuthority simpleGrantedAuthority = new SimpleGrantedAuthority(authority);
         Collection<GrantedAuthority> authorities = new ArrayList<>();
         authorities.add(simpleGrantedAuthority);
