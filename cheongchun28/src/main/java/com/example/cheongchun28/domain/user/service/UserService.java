@@ -1,20 +1,17 @@
 package com.example.cheongchun28.domain.user.service;
 
 import com.example.cheongchun28.domain.user.dto.UserDto;
-import com.example.cheongchun28.domain.user.entity.UserEntity;
 import com.example.cheongchun28.domain.user.repository.UserRepository;
 import com.example.cheongchun28.global.common.dto.CustomResponseDto;
 import com.example.cheongchun28.global.jwt.JwtUtil;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.context.annotation.Bean;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-
 import javax.servlet.http.HttpServletResponse;
 
 @RequiredArgsConstructor

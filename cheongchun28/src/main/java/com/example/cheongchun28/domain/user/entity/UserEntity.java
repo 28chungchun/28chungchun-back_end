@@ -8,7 +8,6 @@ import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
-
 import javax.persistence.*;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
@@ -52,7 +51,7 @@ public class UserEntity implements UserDetails {
     @Column(name = "DELETED", nullable = false)
     private short userDeleted;
 
-    @Column(name = "EMP_NUMBER", nullable = true)
+    @Column(name = "EMP_NUMBER") // nullable = true
     private String empNumber;
 
     public UserEntity(String userEmail, String password, String userName, String profileImage, String empNumber) {

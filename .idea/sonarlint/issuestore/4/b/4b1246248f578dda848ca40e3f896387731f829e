@@ -1,3 +1,23 @@
 
-d
-java:S2094"BRemove this empty class, write its code or make it an "interface".(˜½ªÁıÿÿÿÿ8›è’ƒ1
+x
+java:S1192"VDefine a constant instead of duplicating this literal "Reservation not found" 4 times.(²òáÊùÿÿÿÿ8§ÍÑú“1
+N
+java:S1172"1Remove this unused method parameter "requestDto".(Åôø‹8ƒˆÖú“1
+a
+java:S1854"?Remove this useless assignment to local variable "responseDto".(–Œœ˜ÿÿÿÿÿ8ºÍÑú“1
+g
+java:S1854"ERemove this useless assignment to local variable "reservationEntity".(²òáÊùÿÿÿÿ8ºÍÑú“1
+X
+java:S1481"6Remove this unused "reservationEntity" local variable.(²òáÊùÿÿÿÿ8½ÍÑú“1
+R
+java:S1481"0Remove this unused "responseDto" local variable.(–Œœ˜ÿÿÿÿÿ8¾ÍÑú“1
+a
+java:S1854""?Remove this useless assignment to local variable "responseDto".(–Œœ˜ÿÿÿÿÿ8¿ÍÑú“1
+g
+java:S1854!"ERemove this useless assignment to local variable "reservationEntity".(²òáÊùÿÿÿÿ8ÀÍÑú“1
+X
+java:S1481!"6Remove this unused "reservationEntity" local variable.(²òáÊùÿÿÿÿ8ÂÍÑú“1
+R
+java:S1481""0Remove this unused "responseDto" local variable.(–Œœ˜ÿÿÿÿÿ8ÃÍÑú“1
+N
+java:S1172&"1Remove this unused method parameter "requestDto".(â‡¬Å8ĞÉäú“1
