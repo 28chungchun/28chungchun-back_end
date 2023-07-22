@@ -5,7 +5,6 @@ import lombok.NoArgsConstructor;
 import org.springframework.data.annotation.CreatedDate;
 import org.springframework.data.annotation.LastModifiedDate;
 import org.springframework.data.jpa.domain.support.AuditingEntityListener;
-
 import javax.persistence.*;
 import java.time.LocalDateTime;
 
@@ -24,14 +23,14 @@ public class Reservation { // 예약 엔티티 = 예약 테이블 컬럼들
     @Column(name = "RESERVATION_SEQUENCE_ID", nullable = false)
     private long reservationSequenceId; // 예약 고유 ID
 
-    //    @OneToOne
-//    @JoinColumn(name = "CLASS_SEQUENCE_ID", nullable = false)
+    // @OneToOne
+    // @JoinColumn(name = "CLASS_SEQUENCE_ID", nullable = false)
     @Column(name = "CLASS_SEQUENCE_ID", nullable = false)
     private int classSequenceId; // 강의실 ID
     //필드를 객체 타입으로 변경하는 것이 좋다..
 
-    //    @ManyToOne
-//    @JoinColumn(name = "USER_SEQUNENCE_ID", nullable = false)
+    // @ManyToOne
+    // @JoinColumn(name = "USER_SEQUNENCE_ID", nullable = false)
     @Column(name = "USER_SEQUENCE_ID", nullable = false)
     private long userSequenceId; // 예약한 사용자 ID
 
@@ -43,17 +42,19 @@ public class Reservation { // 예약 엔티티 = 예약 테이블 컬럼들
     @Column(name = "MODIFIED_AT", nullable = false)
     private LocalDateTime modifiedAt; // 예약 수정 일자
 
-    @Column(name = "start_Date", nullable = false)
+    @Column(name = "START_DATE", nullable = false)
     private LocalDateTime startDate; // 예약 시작 시간
 
-    @Column(name = "end_Date", nullable = false)
+    @Column(name = "END_DATE", nullable = false)
     private LocalDateTime endDate; // 예약 종료 시간
 
-    @Column(name = "status", nullable = false)
+    @Column(name = "STATUS", nullable = false)
     private String status; // 예약 상태
 
-    @Column(name = "topic", nullable = false)
+    @Column(name = "TOPIC", nullable = false)
     private String topic; // 예약 목적
+
+
 /*
     @Column(name = "userName", nullable = false)
     private String userName;

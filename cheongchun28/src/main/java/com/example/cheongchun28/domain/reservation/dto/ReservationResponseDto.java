@@ -5,31 +5,42 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
-import java.time.LocalDateTime;
-
 @Getter
 @Setter
 @NoArgsConstructor
-public class ReservationResponseDto {
+public class ReservationResponseDto { // 예약 응답 Dto
 
-    private  int classSequenceId;
-    private  String topic;
-    private LocalDateTime startDate;
-    private LocalDateTime endDate;
-
-
-    // 생성자를 이용하여 통합
-    public ReservationResponseDto(Reservation reservation) {
-        this.classSequenceId = reservation.getClassSequenceId();
-        this.topic = reservation.getTopic();
-        this.startDate = reservation.getStartDate();
-        this.endDate = reservation.getEndDate();
-    }
     @Getter
     @Setter
     public static class ReservationCreateResponseDto { // 예약 생성에 대한 응답값
+        private boolean success; // 예약 성공 실패 여부
+    }
 
-        private int classSequenceId; // 강의실ID
-        private boolean success;
+    @Getter
+    @Setter
+    public static class ReservationGetResponseDto { // 예약 조회에 대한 응답값
+        private boolean success; // 예약 성공 실패 여부
+        private long reservationId; // 예약 번호
+    }
+
+    @Getter
+    @Setter
+    public static class ReservationUpdateResponseDto { // 예약 수정에 대한 응답값
+        private boolean success; // 예약 성공 실패 여부
+
+        public ReservationUpdateResponseDto(boolean b, String s) {
+        }
+
+        public ReservationUpdateResponseDto(Reservation reservation) {
+        }
+    }
+
+    @Getter
+    @Setter
+    public static class ReservationDeleteResponseDto { // 예약 삭제에 대한 응답값
+        private boolean success; // 예약 성공 실패 여부
+
+        public ReservationDeleteResponseDto(boolean b, String s) {
+        }
     }
 }

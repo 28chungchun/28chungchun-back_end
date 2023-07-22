@@ -7,5 +7,16 @@ import org.springframework.stereotype.Repository;
 
 @Repository
 public interface ReservationRepository extends JpaRepository<Reservation, Long> {
-    Reservation findByReservationSequenceId(ReservationRequestDto.ReservationCreateRequestDto reservationCreateRequestDto);
+
+    // 예약 조회 레파지토리
+    Reservation findByUserSequenceId(ReservationRequestDto.ReservationGetRequestDto reservationCreateRequestDto);
+
+    // 예약 수정 레파지토리
+    Reservation findByUserSequenceId(ReservationRequestDto.ReservationUpdateRequestDto reservationUpdateRequestDto);
+
+    // 예약 삭제 레파지토리
+    Reservation deleteByUserSequenceId(ReservationRequestDto.ReservationDeleteRequestDto reservationDeleteRequestDto);
+
+    Reservation deleteByUserSequenceId(int userSequenceId);
+
 }

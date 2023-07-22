@@ -2,35 +2,48 @@ package com.example.cheongchun28.domain.reservation.controller;
 
 import com.example.cheongchun28.domain.reservation.dto.ReservationRequestDto;
 import com.example.cheongchun28.domain.reservation.dto.ReservationResponseDto;
-import com.example.cheongchun28.domain.reservation.entity.Reservation;
 import com.example.cheongchun28.domain.reservation.service.ReservationService;
 import lombok.Getter;
 import lombok.RequiredArgsConstructor;
 import lombok.Setter;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.web.bind.annotation.*;
-import java.time.LocalDateTime;
 
-@Slf4j
 @RequiredArgsConstructor // 생성자 자동으로 생성
-@RequestMapping("/api/reservation")
+//@RequestMapping("/api/reservation")
 @RestController // 어노테이션으로 해당 Class가 Controller임을 알려준다.
-@Getter
-@Setter
+@Slf4j
 public class ReservationController {
 
     private final ReservationService reservationService;
 
-    @PostMapping
-    //예약하기
-    public ReservationResponseDto createReservation(@RequestBody ReservationRequestDto.ReservationCreateRequestDto reservationCreateRequestDto){
-
+    @PostMapping("/api/reservation")
+    //예약하기(Create/Post)
+    public ReservationResponseDto.ReservationCreateResponseDto createdReservation(@RequestBody ReservationRequestDto.ReservationCreateRequestDto reservationCreateRequestDto){
+        log.info("reservationRequestDto : {}", reservationCreateRequestDto);
         return reservationService.createReservation(reservationCreateRequestDto);
-        // 클래스 Resevation의 변수 createReservation에 reservationService.createReservation(reservationCreateRequestDto) 메소드 호출값을 대입시킨다.
-    }
-    // ReservationResponseDto 타입으로 createReservation 메소드를 선언한다..
-    // 클래스 Resevation의 변수 createReservation에 reservationService.createReservation(reservationCreateRequestDto) 메소드 호출값을 대입시킨다.
-    // 대입된 변수 createReservation를 convertToReservationDto()메소드 안에 담아서, 예약 정보를 ReservationResponseDto 객체에 맞게 변환하여 반환한다.
-    // ReservationResponseDto를 리턴한다.
 
+    }
+
+    @GetMapping("/{userSequenceId}")
+    //조회하기(Read/Get)
+    public ReservationResponseDto.ReservationGetResponseDto getedReservation(@RequestBody ReservationRequestDto.ReservationGetRequestDto reservationGetRequestDto){
+        return reservationService.getReservation(reservationGetRequestDto);
+    }
+
+    @PutMapping("/{userSequenceId}")
+    //수정하기(Update/put)
+    public ReservationResponseDto.ReservationUpdateResponseDto updatedReservation(@PathVariable Long userSequenceId, @RequestBody ReservationRequestDto.ReservationUpdateRequestDto reservationUpdateRequestDto) {
+
+        // 클라이언트가 전달한 requestDto를 서비스 클래스로 전달하여 예약 정보 업데이트를 수행하고, 업데이트된 예약 정보를 그대로 반환한다.
+        return reservationService.updateReservation(userSequenceId, reservationUpdateRequestDto);
+
+       // return reservationService.updateReservation(reservationUpdateRequestDto);
+    }
+
+    @DeleteMapping("/{userSequenceId}")
+    //삭제하기(Delete)
+    public ReservationResponseDto.ReservationDeleteResponseDto deleteddReservation(@PathVariable Long userSequenceId, @RequestBody ReservationRequestDto.ReservationDeleteRequestDto reservationDeleteRequestDto){
+        return reservationService.deleteReservation(userSequenceId, reservationDeleteRequestDto);
+    }
 }
