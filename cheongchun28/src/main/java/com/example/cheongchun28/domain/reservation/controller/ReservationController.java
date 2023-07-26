@@ -42,4 +42,13 @@ public class ReservationController {
 
     }
 
+
+    @PostMapping("/entrant/{reservationCode}")
+    public ResponseEntity<CustomResponseDto> joinReservation(@AuthenticationPrincipal User auth,
+                                                             @PathVariable("reservationCode") String code) {
+        CustomResponseDto customResponseDto = reservationService.joinReservation(code, auth);
+        return ResponseEntity.ok(customResponseDto);
+
+    }
+
 }

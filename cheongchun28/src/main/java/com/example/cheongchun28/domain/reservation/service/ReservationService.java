@@ -2,8 +2,10 @@ package com.example.cheongchun28.domain.reservation.service;
 
 import com.example.cheongchun28.domain.reservation.dto.ReservationRequestDto;
 import com.example.cheongchun28.domain.reservation.entity.Reservation;
+import com.example.cheongchun28.domain.reservation.entity.ReservationMember;
 import com.example.cheongchun28.domain.reservation.entity.ReservationStatus;
 import com.example.cheongchun28.domain.reservation.entity.Room;
+import com.example.cheongchun28.domain.reservation.repository.ReservationMemberRepository;
 import com.example.cheongchun28.domain.reservation.repository.ReservationRepository;
 import com.example.cheongchun28.domain.reservation.repository.RoomRepository;
 import com.example.cheongchun28.domain.user.entity.User;
@@ -25,6 +27,7 @@ public class ReservationService {
 
 
     private final ReservationRepository reservationRepository;
+    private final ReservationMemberRepository reservationMemberRepository;
     private final RoomRepository roomRepository;
     private final UserRepository userRepository;
 
@@ -92,9 +95,6 @@ public class ReservationService {
     }
 
 
-
-
-
     // 예약 삭제
     @Transactional
     public CustomResponseDto deleteReservation(User auth, String code) {
@@ -104,6 +104,31 @@ public class ReservationService {
                 .orElseThrow(() -> new IllegalArgumentException(code + "를 찾을 수 없습니다."));
         reservation.deleteReservation();
         reservationRepository.save(reservation);
+        return new CustomResponseDto(200);
+    }
+
+    // 예약 참가
+    @Transactional
+    public CustomResponseDto joinReservation(String code, User auth) {
+        User user =  userRepository.findByUserEmail(auth.getUsername())
+                .orElseThrow(() -> new UsernameNotFoundException(auth.getUsername() + "를 찾을 수 없습니다."));
+        Reservation reservation = reservationRepository.findByCode(code)
+                .orElseThrow(() -> new IllegalArgumentException("예약을 찾을 수 없습니다: " + code));
+        // 유저 예약 생성 체크
+        if (reservation.getStatus() != ReservationStatus.CONFIRMED) {
+            return new CustomResponseDto(400);
+        }
+
+        ReservationMember existingReservationMember = reservationMemberRepository.findByReservationAndUser(reservation, user);
+        if (existingReservationMember != null) {
+            return new CustomResponseDto(400);
+        }
+        reservationMemberRepository.save(
+                ReservationMember.builder()
+                        .reservation(reservation)
+                        .user(auth)
+                        .build()
+        );
         return new CustomResponseDto(200);
     }
 }

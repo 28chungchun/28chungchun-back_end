@@ -4,6 +4,7 @@ package com.example.cheongchun28.domain.reservation.entity;
 import com.example.cheongchun28.domain.user.entity.User;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.AccessLevel;
+import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 
@@ -34,4 +35,10 @@ public class ReservationMember {
     @Column(name = "status")
     private ReservationMemberStatus status;
 
+    @Builder
+    public ReservationMember(Reservation reservation, User user) {
+        this.reservation = reservation;
+        this.user = user;
+        this.status = ReservationMemberStatus.CONFIRMED;
+    }
 }
