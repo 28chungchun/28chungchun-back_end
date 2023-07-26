@@ -13,15 +13,7 @@ public interface ReservationRepository extends JpaRepository<Reservation, Long> 
     @Query("SELECT r FROM Reservation r WHERE r.status = '예약중' AND r.user.userEmail = :userEmail")
     Reservation findWaitingReservationByEmail(@Param("userEmail") String userEmail);
 
-   // Reservation findByReservationCode(@Param("reservationCode") String reservationCode);
-
-    @Query(value = "SELECT * FROM t_reservation WHERE reservation_Code = :reservationCode", nativeQuery = true)
+    @Query(value = "SELECT * FROM t_reservation r WHERE r.reservation_Code = :reservationCode AND r.status In ('예약중')" , nativeQuery = true)
     Reservation findByReservationCode(@Param("reservationCode") String reservationCode);
-
-//
-//    // 예약 삭제 레파지토리
-//    Reservation deleteByUserSequenceId(ReservationRequestDto.ReservationDeleteRequestDto reservationDeleteRequestDto);
-//
-//    Reservation deleteByUserSequenceId(int userSequenceId);
 
 }

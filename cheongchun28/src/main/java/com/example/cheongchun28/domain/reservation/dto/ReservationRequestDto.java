@@ -1,10 +1,16 @@
 package com.example.cheongchun28.domain.reservation.dto;
 
+import com.example.cheongchun28.domain.reservation.entity.Reservation;
+import com.example.cheongchun28.domain.user.entity.User;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
+import javax.persistence.Column;
+import javax.persistence.JoinColumn;
+import javax.persistence.OneToMany;
 import java.time.LocalDateTime;
+import java.util.List;
 
 @NoArgsConstructor
 public class ReservationRequestDto { // 예약 요청 Dto
@@ -29,15 +35,6 @@ public class ReservationRequestDto { // 예약 요청 Dto
         }
 
     }
-
-    @Getter
-    @Setter
-    public static class ReservationGetRequestDto{
-
-
-
-    }
-
 
     @Setter
     @Getter
@@ -75,4 +72,27 @@ public class ReservationRequestDto { // 예약 요청 Dto
                     this.startTime, this.endTime, this.particName, this.particProfile, this. reservationState);
         }*/
 
-}
+    /*
+    @Setter
+    @Getter
+    @NoArgsConstructor //-> 얘 있으면 기본 생성자 만들어짐
+    public static class MemberCreateRequestDto {
+        private long reservationMemberId;
+        private List<Reservation> reservation; // 예약 고유 ID
+        private List<User> user; // 참가한 사용자 ID
+        private String status; // 예약 참가 상태
+        private String isInvitor; // 방장인지 아닌지
+
+        public MemberCreateRequestDto(long reservationMemberId, List<Reservation> reservation, List<User> user, String status, String isInvitor) {
+            this.reservationMemberId = reservationMemberId;
+            this.reservation = reservation;
+            this.user = user;
+            this.status = status;
+            this.isInvitor = isInvitor;
+
+        }
+    }
+
+     */
+
+    }

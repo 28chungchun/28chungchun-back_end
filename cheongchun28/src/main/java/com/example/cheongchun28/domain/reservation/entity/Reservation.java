@@ -4,6 +4,7 @@ import com.example.cheongchun28.domain.user.entity.User;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import lombok.ToString;
 import org.springframework.data.annotation.CreatedDate;
 import org.springframework.data.annotation.LastModifiedDate;
 import org.springframework.data.jpa.domain.support.AuditingEntityListener;
@@ -31,6 +32,7 @@ public class Reservation { // 예약 엔티티 = 예약 테이블 컬럼들
     //필드를 객체 타입으로 변경하는 것이 좋다..
 
     @ManyToOne
+    @ToString.Exclude
     @JoinColumn(name = "USER_SEQUENCE_ID", nullable = false)
     //@Column(name = "USER_SEQUENCE_ID", nullable = false)
     private User user; // 예약한 사용자 ID

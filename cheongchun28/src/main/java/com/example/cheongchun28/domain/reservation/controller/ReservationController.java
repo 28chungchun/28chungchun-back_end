@@ -3,6 +3,8 @@ package com.example.cheongchun28.domain.reservation.controller;
 import com.example.cheongchun28.domain.reservation.dto.ReservationRequestDto;
 import com.example.cheongchun28.domain.reservation.dto.ReservationResponseDto;
 import com.example.cheongchun28.domain.reservation.service.ReservationService;
+import com.example.cheongchun28.domain.user.dto.UserDto;
+import com.example.cheongchun28.global.common.dto.CustomResponseDto;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.web.bind.annotation.*;
@@ -48,4 +50,14 @@ public class ReservationController {
     public ReservationResponseDto.ReservationDeleteResponseDto deletedReservation(@PathVariable String email, @RequestBody ReservationRequestDto.ReservationDeleteRequestDto reservationDeleteRequestDto){
         return reservationService.deleteReservation(email, reservationDeleteRequestDto);
     }
+
+    //예약 참가
+    @PostMapping("/entrant/{reservationCode}")
+    public CustomResponseDto entrant(@PathVariable String reservationCode, HttpServletRequest httpServletRequest) throws SQLException {
+        log.info("예약 참가 시도됨");
+        return reservationService.entrant(reservationCode, httpServletRequest);
+    }
+
+    //예약 참가 취소
+
 }

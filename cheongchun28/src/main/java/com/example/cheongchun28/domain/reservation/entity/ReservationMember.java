@@ -4,7 +4,6 @@ import com.example.cheongchun28.domain.user.entity.User;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import javax.persistence.*;
-import java.util.List;
 
 @NoArgsConstructor
 @Data
@@ -17,15 +16,28 @@ public class ReservationMember {
     @Column(name = "RESERVATION_MEMBER_ID", nullable = false)
     private long reservationMemberId; // 예약회원 고유 번호
 
-    @OneToMany
+    @ManyToOne
     @JoinColumn(name = "RESERVATION_SEQUENCE_ID", nullable = false)
-    private List<Reservation> reservation; // 예약 고유 ID
+    private Reservation reservation; // 예약 고유 ID
 
-    @OneToMany
+    @ManyToOne
     @JoinColumn(name = "USER_SEQUENCE_ID", nullable = false)
-    private List<User> user; // 참가한 사용자 ID
+    private User user; // 참가한 사용자 ID
 
     @Column(name = "STATUS", nullable = false)
     private String status; // 예약 참가 상태
 
+    @Column(name = "IS_INVITOR", nullable = false)
+    private String isInvitor; // 방장인지 아닌지
+
+    public void toEntity(long reservationMemberId, Reservation reservation, User user, String status, String isInvitor) {
+
+        // 부여해줘야하는 값
+        this.reservationMemberId = reservationMemberId;
+        this.reservation = reservation;
+        this.user = user;
+        this.status = status;
+        this.isInvitor = isInvitor;
+
+    }
 }

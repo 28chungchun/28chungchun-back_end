@@ -1,11 +1,11 @@
 package com.example.cheongchun28.domain.reservation.dto;
 
-import com.example.cheongchun28.domain.reservation.entity.Room;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import java.time.LocalDateTime;
+import java.util.List;
 
 @Getter
 @Setter
@@ -43,8 +43,9 @@ public class ReservationResponseDto { // 예약 응답 Dto
         private String status;
         private LocalDateTime startDate;
         private LocalDateTime endDate;
+        private List<String> user;
 
-        public ReservationGetOneResponseDto(String roomName, String topic, String username, String status, LocalDateTime startDate, LocalDateTime endDate) {
+        public ReservationGetOneResponseDto(String roomName, String topic, String username, String status, LocalDateTime startDate, LocalDateTime endDate, List<String> user) {
            // this.statusCode = statusCode;
             this.roomName = roomName;
             this.topic = topic;
@@ -52,6 +53,7 @@ public class ReservationResponseDto { // 예약 응답 Dto
             this.status = status;
             this.startDate = startDate;
             this.endDate = endDate;
+            this.user = user;
         }
 
     }
