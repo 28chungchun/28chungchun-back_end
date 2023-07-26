@@ -77,4 +77,8 @@ public class Reservation {
         this.topic = topic;
         this.code = generateCode();
     }
+
+    public void deleteReservation(){
+        this.status = ReservationStatus.CANCELLED;
+    }
 }

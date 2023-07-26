@@ -28,7 +28,7 @@ public class ReservationService {
     private final RoomRepository roomRepository;
     private final UserRepository userRepository;
 
-
+    // 예약 생성
     @Transactional
     public CustomResponseDto createReservation(User auth, ReservationRequestDto.CreateReservationDto createReservationDto) {
         try {
@@ -92,4 +92,18 @@ public class ReservationService {
     }
 
 
+
+
+
+    // 예약 삭제
+    @Transactional
+    public CustomResponseDto deleteReservation(User auth, String code) {
+        userRepository.findByUserEmail(auth.getUsername())
+                .orElseThrow(() -> new UsernameNotFoundException(auth.getUsername() + "를 찾을 수 없습니다."));
+        Reservation reservation = reservationRepository.findByCode(code)
+                .orElseThrow(() -> new IllegalArgumentException(code + "를 찾을 수 없습니다."));
+        reservation.deleteReservation();
+        reservationRepository.save(reservation);
+        return new CustomResponseDto(200);
+    }
 }

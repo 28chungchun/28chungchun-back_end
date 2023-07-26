@@ -8,6 +8,7 @@ import org.springframework.stereotype.Repository;
 
 import java.time.LocalDateTime;
 import java.util.List;
+import java.util.Optional;
 
 @Repository
 public interface ReservationRepository extends JpaRepository<Reservation, Long> {
@@ -19,4 +20,6 @@ public interface ReservationRepository extends JpaRepository<Reservation, Long> 
     List<Reservation> findOverlappingReservations(String className, LocalDateTime startTime, LocalDateTime endTime);
 
     List<Reservation> findByUserAndStartTimeBetweenAndEndTimeBetween(User user, LocalDateTime startTime1, LocalDateTime endTime1, LocalDateTime startTime2, LocalDateTime endTime2);
+
+    Optional<Reservation> findByCode(String code);
 }
