@@ -34,8 +34,8 @@ public class ReservationService { // 예약 서비스 로직
     public ReservationResponseDto.ReservationCreateResponseDto createReservation(ReservationRequestDto.ReservationCreateRequestDto reservationCreateRequestDto, HttpServletRequest httpServletRequest) throws SQLException {
         Reservation reservation = new Reservation();
 
-        String token = jwtUtil.resolveToken(httpServletRequest);  //헤더에서 토큰값 가져오기
-        String userEmail = jwtUtil.getUserPk(token); // 이메일 추출
+        String token = jwtUtil.getToken(httpServletRequest);  //헤더에서 토큰값 가져오기
+        String userEmail = jwtUtil.getEmailAtToken(token); // 이메일 추출
 
         User user = userRepository.findByUserEmail(userEmail).orElseThrow(
                 ()->new SQLException("찾으시는 값이 없습니다.")
@@ -69,8 +69,8 @@ public class ReservationService { // 예약 서비스 로직
     // 예약 조회 서비스 (전체)
     public ReservationResponseDto.ReservationGetResponseDto getReservation(HttpServletRequest httpServletRequest) {
 
-        String token = jwtUtil.resolveToken(httpServletRequest);  //헤더에서 토큰값 가져오기
-        String userEmail = jwtUtil.getUserPk(token); // 이메일 추출
+        String token = jwtUtil.getToken(httpServletRequest);  //헤더에서 토큰값 가져오기
+        String userEmail = jwtUtil.getEmailAtToken(token); // 이메일 추출
 
         Reservation reservation = reservationRepository.findWaitingReservationByEmail(userEmail);
 
@@ -85,11 +85,11 @@ public class ReservationService { // 예약 서비스 로직
         List<ReservationMember> reservationMember = reservationMemberRepository.findByReservation(reservation);
         ArrayList<String> memberUser = new ArrayList<>();
         for (ReservationMember rm : reservationMember) {
-            memberUser.add(rm.getUser().getUsername());
+            memberUser.add(rm.getUser().getNickName());
         }
         // 예약번호에 해당하는 값들을 찾는다.
         return new ReservationResponseDto.ReservationGetOneResponseDto(reservation.getRoom().getRoomName(),
-                reservation.getTopic(), reservation.getUser().getUsername(), reservation.getStatus(),
+                reservation.getTopic(), reservation.getUser().getNickName(), reservation.getStatus(),
                 reservation.getStartDate(), reservation.getEndDate(), memberUser);
     }
 
@@ -144,8 +144,8 @@ public class ReservationService { // 예약 서비스 로직
     // 예약 참가
     public CustomResponseDto entrant(String reservationCode, HttpServletRequest httpServletRequest) throws SQLException {
 
-        String token = jwtUtil.resolveToken(httpServletRequest);  //헤더에서 토큰값 가져오기
-        String userEmail = jwtUtil.getUserPk(token); //이메일 추출
+        String token = jwtUtil.getToken(httpServletRequest);  //헤더에서 토큰값 가져오기
+        String userEmail = jwtUtil.getEmailAtToken(token); //이메일 추출
 
         User user = userRepository.findByUserEmail(userEmail).orElseThrow( // 회원 이메일로 현재 로그인한 유저 정보 찾기
                 ()->new SQLException("찾으시는 값이 없습니다.")

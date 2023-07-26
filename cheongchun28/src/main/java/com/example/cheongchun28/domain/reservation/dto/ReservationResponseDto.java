@@ -39,17 +39,17 @@ public class ReservationResponseDto { // 예약 응답 Dto
        // private int statusCode; // 예약 성공 실패 여부
         private String roomName;
         private String topic;
-        private String username;
+        private String nickName;
         private String status;
         private LocalDateTime startDate;
         private LocalDateTime endDate;
         private List<String> user;
 
-        public ReservationGetOneResponseDto(String roomName, String topic, String username, String status, LocalDateTime startDate, LocalDateTime endDate, List<String> user) {
+        public ReservationGetOneResponseDto(String roomName, String topic, String nickName, String status, LocalDateTime startDate, LocalDateTime endDate, List<String> user) {
            // this.statusCode = statusCode;
             this.roomName = roomName;
             this.topic = topic;
-            this.username = username;
+            this.nickName = nickName;
             this.status = status;
             this.startDate = startDate;
             this.endDate = endDate;
