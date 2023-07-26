@@ -1,5 +1,7 @@
 package com.example.cheongchun28.domain.reservation.entity;
 
+import com.example.cheongchun28.domain.user.entity.User;
+import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import org.springframework.data.annotation.CreatedDate;
@@ -23,16 +25,15 @@ public class Reservation { // 예약 엔티티 = 예약 테이블 컬럼들
     @Column(name = "RESERVATION_SEQUENCE_ID", nullable = false)
     private long reservationSequenceId; // 예약 고유 ID
 
-    // @OneToOne
-    // @JoinColumn(name = "CLASS_SEQUENCE_ID", nullable = false)
-    @Column(name = "CLASS_SEQUENCE_ID", nullable = false)
-    private int classSequenceId; // 강의실 ID
+    @OneToOne
+    @JoinColumn(name = "ROOM_SEQUENCE_ID", nullable = false)
+    private Room room; // 강의실 ID
     //필드를 객체 타입으로 변경하는 것이 좋다..
 
-    // @ManyToOne
-    // @JoinColumn(name = "USER_SEQUNENCE_ID", nullable = false)
-    @Column(name = "USER_SEQUENCE_ID", nullable = false)
-    private long userSequenceId; // 예약한 사용자 ID
+    @ManyToOne
+    @JoinColumn(name = "USER_SEQUENCE_ID", nullable = false)
+    //@Column(name = "USER_SEQUENCE_ID", nullable = false)
+    private User user; // 예약한 사용자 ID
 
     @CreatedDate
     @Column(name = "CREATED_AT", nullable = false)
@@ -54,22 +55,22 @@ public class Reservation { // 예약 엔티티 = 예약 테이블 컬럼들
     @Column(name = "TOPIC", nullable = false)
     private String topic; // 예약 목적
 
+    @Column(name = "RESERVATION_CODE", nullable = false, unique = true)
+    private String reservationCode;
 
-/*
-    @Column(name = "userName", nullable = false)
-    private String userName;
-*/
-   /* public Reservation(long reservationSequenceId, int classSequenceId, long userSequenceId, String topic, String userName,
-                       LocalDateTime startTime, LocalDateTime endTime, String particName, String particProfile, int reservationState) {
-        this.reservationSequenceId = reservationSequenceId,
-                this.classSequenceId = classSequenceId,
-                this.userSequenceId = userSequenceId,
-                this.topic = topic,
-                this.userName = userName,
-                this.startTime = startTime,
-                this.endTime = endTime,
-                this.particName
-    }*/
+    @Builder
+    public void toEntity(String topic, LocalDateTime startDate, LocalDateTime endDate, Room room, User user, String status, String reservationCode){
 
+        // 클라이언트에게 받을 값
+        this.topic = topic;
+        this.startDate = startDate;
+        this.endDate = endDate;
 
+        // 부여해줘야하는 값
+        this.room = room;
+        this.user = user;
+        this.status = status;
+        this.reservationCode = reservationCode;
+
+    }
 }

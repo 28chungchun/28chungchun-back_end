@@ -1,8 +1,10 @@
 package com.example.cheongchun28.global.jwt;
 
 import io.jsonwebtoken.*;
+import lombok.NoArgsConstructor;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.slf4j.Logger;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
@@ -41,6 +43,7 @@ public class JwtUtil {
         secretKey = Base64.getEncoder().encodeToString(secretKey.getBytes());
     }
 
+    //헤더에서 토큰값 가져오기
     public String resolveToken(HttpServletRequest request) {
         String bearerToken = request.getHeader(AUTHORIZATION_HEADER);
         if (StringUtils.hasText(bearerToken) && bearerToken.startsWith(BEARER_PREFIX)) {

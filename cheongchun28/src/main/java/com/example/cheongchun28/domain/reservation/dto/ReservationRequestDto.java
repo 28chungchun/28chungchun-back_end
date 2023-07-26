@@ -12,23 +12,17 @@ public class ReservationRequestDto { // 예약 요청 Dto
 
     @Getter
     @Setter
-    @NoArgsConstructor
+    @NoArgsConstructor //-> 얘 있으면 기본 생성자 만들어짐
     public static class ReservationCreateRequestDto { // create. 우리가 받아야할 값
 
-        //private long reservationSequenceId;; // 예약 ID
-        //private int classSequenceId; // 강의실ID
-        private String className; //강의실명
-       // private long userSequenceId; // 회원 고유 ID
+        private String roomName; // 강의실명
         private String topic; // 예약 목적
-       // private String userName; // 예약자 이름
         private LocalDateTime startDate; // 예약 시작 시간
         private LocalDateTime endDate; // 예약 종료 시간
-        //private String particName; // 참여자 이름
-      //  private String profileImage; // 참여자 프로필 사진
-        //private int reservationState; // 예약 상태
 
-        public ReservationCreateRequestDto(String className, String topic, LocalDateTime startDate, LocalDateTime endDate) {
-            this.className = className;
+        //인자를 받아 해당 값들로 객체를 초기화하기 위한 생성자
+        public ReservationCreateRequestDto(String roomName, String topic, LocalDateTime startDate, LocalDateTime endDate) {
+            this.roomName = roomName;
             this.topic = topic;
             this.startDate = startDate;
             this.endDate = endDate;
@@ -38,11 +32,12 @@ public class ReservationRequestDto { // 예약 요청 Dto
 
     @Getter
     @Setter
-    public static class ReservationGetRequestDto { // get. 우리가 받아야할 값
+    public static class ReservationGetRequestDto{
 
-        private long userSequenceId; // 회원 고유 ID
+
 
     }
+
 
     @Setter
     @Getter
@@ -61,15 +56,19 @@ public class ReservationRequestDto { // 예약 요청 Dto
 
     @Setter
     @Getter
+    @NoArgsConstructor //-> 얘 있으면 기본 생성자 만들어짐
     public static class ReservationDeleteRequestDto { // delete. 우리가 받아야할 값
 
         private long userSequenceId; // 회원 고유 ID
-        public long deleteUserSequenceId() {
-            return 0;
+        private long reservationSequenceId; // 예약 고유 ID
+        private String status; // 예약 상태
+
+        public ReservationDeleteRequestDto(long userSequenceId, long reservationSequenceId, String status) {
+            this.userSequenceId = userSequenceId;
+            this.reservationSequenceId = reservationSequenceId;
+            this.status = status;
         }
     }
-
-
 
     /*   public Reservation toEntity() {
             return new Reservation(this.reservationSequenceId, this.classSequenceId, this.userSequenceId, this.topic, this.userName,
