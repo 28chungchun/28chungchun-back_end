@@ -1,5 +1,6 @@
 package com.example.cheongchun28.domain.user.entity;
 
+import com.example.cheongchun28.domain.reservation.entity.Reservation;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import org.springframework.data.annotation.CreatedDate;
@@ -13,6 +14,7 @@ import javax.persistence.*;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.Collection;
+import java.util.List;
 
 @NoArgsConstructor
 @EntityListeners(AuditingEntityListener.class)
@@ -55,6 +57,14 @@ public class User implements UserDetails {
     @Column(name = "EMP_NUMBER", nullable = true)
     private String empNumber;
 
+    @OneToMany(mappedBy = "user", fetch = FetchType.LAZY)
+    private List<Reservation> reservations = new ArrayList<>();
+
+    public List<Reservation> getReservations() {
+        return reservations;
+    }
+
+
     public User(String userEmail, String password, String userName, String profileImage, String empNumber) {
         this.role = Role.USER;
         this.userEmail = userEmail;
@@ -79,6 +89,7 @@ public class User implements UserDetails {
     public String getUsername() {
         return this.userEmail;
     }
+
     @Override
     public String getPassword() {
         return this.encodedPassword;
