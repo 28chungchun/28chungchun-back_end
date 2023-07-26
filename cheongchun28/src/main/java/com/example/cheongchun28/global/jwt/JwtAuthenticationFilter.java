@@ -17,7 +17,7 @@ public class JwtAuthenticationFilter implements Filter {
     @Override
     public void doFilter(ServletRequest request, ServletResponse response, FilterChain chain) throws IOException, ServletException {
         // get JWT at Header
-        String token = jwtUtil.resolveToken((HttpServletRequest) request);
+        String token = jwtUtil.getToken((HttpServletRequest) request);
 
         //Token 유효성 검사
         if (token != null && jwtUtil.validateToken(token)) {

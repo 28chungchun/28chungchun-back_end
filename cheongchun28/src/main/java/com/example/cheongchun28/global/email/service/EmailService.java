@@ -38,18 +38,18 @@ public class EmailService {
     //    private static final int CONFIRM_CODE_VALID_MINUS = 3;
     private static final String CONFIRM_EMAIL_SUBJECT = "천재교육 이메일 인증";
     private static final String CONFIRM_EMAIL_CONTENT_TEMPLATE = "<div style='margin:20px;'>\n" +
-                "<h1> 천재교육 </h1>\n" +
-                "<br/><br/>" +
-                "<p>아래 코드를 복사해 입력해주세요<p>" +
-                "<br/><br/>" +
-                "<p>감사합니다.<p>" +
-                "<br/><br/>" +
-                    "<div align='center' style='border:1px solid black; font-family:verdana';>" +
-                    "<h3 style='color:blue;'>회원가입 인증 코드입니다.</h3>" +
-                        "<div style='font-size:130%%'>" +
-                        "<strong>%s</strong>" +
-                    "</div><br/><br/>"+
-                "</div>" +
+            "<h1> 천재교육 </h1>\n" +
+            "<br/><br/>" +
+            "<p>아래 코드를 복사해 입력해주세요<p>" +
+            "<br/><br/>" +
+            "<p>감사합니다.<p>" +
+            "<br/><br/>" +
+            "<div align='center' style='border:1px solid black; font-family:verdana';>" +
+            "<h3 style='color:blue;'>회원가입 인증 코드입니다.</h3>" +
+            "<div style='font-size:130%%'>" +
+            "<strong>%s</strong>" +
+            "</div><br/><br/>" +
+            "</div>" +
             "</div>";
 
     private static final String RESET_PASSWORD_EMAIL_SUBJECT = "천재교육 비밀번호 초기화";

@@ -14,8 +14,4 @@ public class EmailDto {
             return new EmailEntity(this.email = requestDto.getEmail(), this.confirmCode = requestDto.getConfirmCode());
         }
     }
-
-    public static class CreateConfimCodeRequestDto {
-        private String email;
-    }
 }

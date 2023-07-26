@@ -22,14 +22,14 @@ public class UserDto {
         private String password;
 
         @NotBlank
-        private String userName;
+        private String nickName;
 
         private String profileImage;
 
         private String empNumber;
 
         public User toEntity(String encodePassword) {
-            return new User(this.email, this.password = encodePassword, this.userName, this.profileImage, this.empNumber);
+            return new User(this.email, this.password = encodePassword, this.nickName, this.profileImage, this.empNumber);
         }
     }
 

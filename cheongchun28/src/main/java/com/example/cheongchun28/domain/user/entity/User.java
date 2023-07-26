@@ -3,7 +3,6 @@ package com.example.cheongchun28.domain.user.entity;
 import com.example.cheongchun28.domain.reservation.entity.Reservation;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-import org.hibernate.validator.constraints.UniqueElements;
 import org.springframework.data.annotation.CreatedDate;
 import org.springframework.data.annotation.LastModifiedDate;
 import org.springframework.data.jpa.domain.support.AuditingEntityListener;
@@ -46,8 +45,8 @@ public class User implements UserDetails {
     @Column(name = "PASSWORD", nullable = false)
     private String encodedPassword;
 
-    @Column(name = "USERNAME", nullable = false, unique = true)
-    private String userName;
+    @Column(name = "NICK_NAME", nullable = false, unique = true)
+    private String nickName;
 
     @Column(name = "PROFILE_IMAGE", nullable = false)
     private String profileImage;
@@ -61,11 +60,14 @@ public class User implements UserDetails {
     @OneToMany(mappedBy = "user", fetch = FetchType.LAZY)
     private List<Reservation> reservation;
 
+    @Column(name = "NOTIFICATION_AGREEMENT", nullable = false)
+    private boolean notificationAgreement;
+
     public User(String userEmail, String password, String userName, String profileImage, String empNumber) {
         this.role = Role.USER;
         this.userEmail = userEmail;
         this.encodedPassword = password;
-        this.userName = userName;
+        this.nickName = userName;
         this.profileImage = profileImage;
         this.userDeleted = 1;
         this.empNumber = empNumber;
