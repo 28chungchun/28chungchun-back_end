@@ -33,7 +33,14 @@ public class ReservationMember {
 
 
     @Column(name = "status")
+    @Enumerated(EnumType.ORDINAL)
     private ReservationMemberStatus status;
+
+
+    @Column(name = "is_invitor")
+    private String isInvitor; // 방장인지 아닌지
+
+
 
     @Builder
     public ReservationMember(Reservation reservation, User user) {

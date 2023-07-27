@@ -2,6 +2,7 @@ package com.example.cheongchun28.domain.reservation.controller;
 
 
 import com.example.cheongchun28.domain.reservation.dto.ReservationRequestDto;
+import com.example.cheongchun28.domain.reservation.dto.ReservationResponseDto;
 import com.example.cheongchun28.domain.reservation.service.ReservationService;
 import com.example.cheongchun28.domain.user.entity.User;
 import com.example.cheongchun28.global.common.dto.CustomResponseDto;
@@ -10,6 +11,9 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.web.bind.annotation.*;
+
+import javax.servlet.http.HttpServletRequest;
+import javax.validation.Valid;
 
 @Slf4j
 @RestController
@@ -29,6 +33,20 @@ public class ReservationController {
     }
 
 
+    @GetMapping()
+    //조회하기(Read/Get) - (전체)
+    public ResponseEntity<ReservationResponseDto.ReservationGetResponseDto> getedReservation(@AuthenticationPrincipal User auth) {
+        log.info("reservation read, auth: {}", auth.getUsername());
+        return ResponseEntity.ok(reservationService.getReservation(auth));
+    }
+
+    @GetMapping("/{reservationCode}")
+    //예약 건당 조회하기(Read/Get) - (하나에 대한)
+    public ReservationResponseDto.ReservationGetOneResponseDto getedReservation(@PathVariable("reservationCode") String code) {
+        return reservationService.getReservation(code);
+    }
+
+
 
     // 예약 삭제
     @DeleteMapping("/{reservationCode}")
@@ -37,12 +55,24 @@ public class ReservationController {
         log.info("reservation delete, reservationcode: {}, auth: {}", code, auth.getUsername());
 
 
-        CustomResponseDto responseDto = reservationService.deleteReservation(auth, code);
-        return ResponseEntity.ok(responseDto);
+        CustomResponseDto customResponseDto = reservationService.deleteReservation(auth, code);
+        return ResponseEntity.ok(customResponseDto);
 
     }
 
+    // 예약 수정
+    @PutMapping("/{reservationCode}")
+    public ResponseEntity<CustomResponseDto> updateReservation(@Valid @AuthenticationPrincipal User auth,
+                                                               @PathVariable("reservationCode") String code,
+                                                               @RequestBody ReservationRequestDto.UpdateReservationDto updateReservationDto) {
+        log.info("reservation update,  auth: {},  updateReservation: {}, reservationCode: {}", auth, updateReservationDto, code);
 
+        CustomResponseDto customResponseDto = reservationService.updateReservation(auth, code, updateReservationDto);
+        return ResponseEntity.ok(customResponseDto);
+    }
+
+
+    // 예약 참가
     @PostMapping("/entrant/{reservationCode}")
     public ResponseEntity<CustomResponseDto> joinReservation(@AuthenticationPrincipal User auth,
                                                              @PathVariable("reservationCode") String code) {

@@ -85,6 +85,10 @@ public class User implements UserDetails {
         return authorities;
     }
 
+    public String getNickName() {
+        return this.userName;
+    }
+
     @Override
     public String getUsername() {
         return this.userEmail;

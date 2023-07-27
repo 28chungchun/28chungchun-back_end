@@ -18,6 +18,10 @@ import java.time.LocalDateTime;
 @NoArgsConstructor
 public class ReservationRequestDto {
 
+    public static boolean isMinimumHourInterval(LocalDateTime startTime, LocalDateTime endTime) {
+        Duration duration = Duration.between(startTime, endTime);
+        return duration.toHours() >= 1;
+    }
 
     @Getter
     @Setter
@@ -27,20 +31,20 @@ public class ReservationRequestDto {
         private String className;
 
         @NotNull(message = "예약 시작 시간은 필수 입력 값입니다.")
-        private LocalDateTime startTime;
+        private LocalDateTime startDate;
 
         @NotNull(message = "예약 종료 시간은 필수 입력 값입니다.")
-        private LocalDateTime endTime;
+        private LocalDateTime endDate;
 
         private ReservationStatus status;
 
         private String topic;
 
         @Builder
-        public CreateReservationDto(String className, LocalDateTime startTime, LocalDateTime endTime, String topic) {
+        public CreateReservationDto(String className, LocalDateTime startDate, LocalDateTime endDate, String topic) {
             this.className = className;
-            this.startTime = startTime;
-            this.endTime = endTime;
+            this.startDate = startDate;
+            this.endDate = endDate;
             this.topic = topic;
         }
 
@@ -48,17 +52,43 @@ public class ReservationRequestDto {
             return Reservation
                     .builder()
                     .user(user)
-                    .startTime(startTime)
-                    .endTime(endTime)
+                    .startDate(startDate)
+                    .endDate(endDate)
                     .room(room)
                     .status(ReservationStatus.CONFIRMED)
                     .topic(topic)
                     .build();
         }
 
-        public boolean isMinimumHourInterval(LocalDateTime startTime, LocalDateTime endTime) {
-            Duration duration = Duration.between(startTime, endTime);
-            return duration.toHours() >= 1;
+        public boolean isValid() {
+            return ReservationRequestDto.isMinimumHourInterval(startDate, endDate);
         }
+    }
+
+
+    @Getter
+    @Setter
+    @NoArgsConstructor
+    public static class UpdateReservationDto {
+
+        @NotNull(message = "예약 시작 시간은 필수 입력 값입니다.")
+        private LocalDateTime startDate;
+
+        @NotNull(message = "예약 종료 시간은 필수 입력 값입니다.")
+        private LocalDateTime endDate;
+
+        @NotNull(message = "예약 사유를 입력해주세요.")
+        private String topic;
+
+        public UpdateReservationDto(LocalDateTime startDate, LocalDateTime endDate, String topic) {
+            this.startDate = startDate;
+            this.endDate = endDate;
+            this.topic = topic;
+        }
+
+        public boolean isValid() {
+            return ReservationRequestDto.isMinimumHourInterval(startDate, endDate);
+        }
+
     }
 }

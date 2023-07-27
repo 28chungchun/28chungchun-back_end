@@ -1,6 +1,7 @@
 package com.example.cheongchun28.domain.reservation.entity;
 
 
+import com.example.cheongchun28.domain.reservation.repository.ReservationRepository;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.AccessLevel;
 import lombok.Getter;
@@ -10,6 +11,8 @@ import javax.persistence.*;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
+import java.util.Objects;
 
 @Table(name = "T_class")
 @Getter
@@ -30,7 +33,6 @@ public class Room {
 
     @Column(name = "computer")
     private int computer;
-
     @Column(name = "blackboard")
     private int blackBoard;
 
@@ -44,9 +46,8 @@ public class Room {
 
     public boolean isRoomReserved(LocalDateTime startTime, LocalDateTime endTime) {
         for (Reservation reservation : reservations) {
-            LocalDateTime reservationStartTime = reservation.getStartTime();
-            LocalDateTime reservationEndTime = reservation.getEndTime();
-
+            LocalDateTime reservationStartTime = reservation.getStartDate();
+            LocalDateTime reservationEndTime = reservation.getEndDate();
             if (reservationStartTime.isBefore(endTime) && reservationEndTime.isAfter(startTime)) {
                 return true;
             }
