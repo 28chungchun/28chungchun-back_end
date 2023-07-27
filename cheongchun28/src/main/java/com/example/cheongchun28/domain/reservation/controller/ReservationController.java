@@ -3,10 +3,10 @@ package com.example.cheongchun28.domain.reservation.controller;
 import com.example.cheongchun28.domain.reservation.dto.ReservationRequestDto;
 import com.example.cheongchun28.domain.reservation.dto.ReservationResponseDto;
 import com.example.cheongchun28.domain.reservation.service.ReservationService;
-import com.example.cheongchun28.domain.user.dto.UserDto;
 import com.example.cheongchun28.global.common.dto.CustomResponseDto;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import javax.servlet.http.HttpServletRequest;
 import java.sql.SQLException;
@@ -21,9 +21,10 @@ public class ReservationController {
 
     @PostMapping()
     //예약하기(Create/Post)
-    public ReservationResponseDto.ReservationCreateResponseDto createdReservation(@RequestBody ReservationRequestDto.ReservationCreateRequestDto reservationCreateRequestDto, HttpServletRequest httpServletRequest) throws SQLException {
+    public ResponseEntity<ReservationResponseDto.ReservationCreateResponseDto> createdReservation(@RequestBody ReservationRequestDto.ReservationCreateRequestDto reservationCreateRequestDto, HttpServletRequest httpServletRequest) throws SQLException {
         log.info("reservationRequestDto : {}", reservationCreateRequestDto);
-        return reservationService.createReservation(reservationCreateRequestDto, httpServletRequest);
+//        return reservationService.createReservation(reservationCreateRequestDto, httpServletRequest);
+        return ResponseEntity.ok(reservationService.createReservation(reservationCreateRequestDto, httpServletRequest));
     }
 
     @GetMapping()

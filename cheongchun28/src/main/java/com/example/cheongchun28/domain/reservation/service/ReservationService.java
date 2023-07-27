@@ -14,6 +14,7 @@ import com.example.cheongchun28.global.common.dto.CustomResponseDto;
 import com.example.cheongchun28.global.jwt.JwtUtil;
 import lombok.RequiredArgsConstructor;
 import net.bytebuddy.utility.RandomString;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 import javax.servlet.http.HttpServletRequest;
 import java.sql.SQLException;
@@ -54,6 +55,7 @@ public class ReservationService { // 예약 서비스 로직
 
         // 생성자를 이용하여 ReservationResponseDto 객체 생성
         return new ReservationResponseDto.ReservationCreateResponseDto(200); // 성공했을때
+//        return ResponseEntity.ok(new ReservationResponseDto.ReservationCreateResponseDto(200));
     }
 
 

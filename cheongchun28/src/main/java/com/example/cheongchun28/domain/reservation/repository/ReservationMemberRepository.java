@@ -17,7 +17,9 @@ public interface ReservationMemberRepository extends JpaRepository<ReservationMe
     ReservationMember findByReservationCode(@Param("reservationCode") String reservationCode);
 */
 
+    @Query(value = " select * from t_reservation_member r where r.status = '참여중' group by r.user_sequence_Id", nativeQuery = true)
     List<ReservationMember> findByReservation(Reservation reservation);
+
  /*
 //예약 참가 API 생성 후에 예약 조회할 때 쓰자.
     @Query("select r.user.userName" + " From t_reservation_member r " + " Where r.reservation_Code = :reservationCode" +
