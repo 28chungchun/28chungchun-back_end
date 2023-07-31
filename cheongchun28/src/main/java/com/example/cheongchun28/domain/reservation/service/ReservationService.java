@@ -171,7 +171,7 @@ public class ReservationService {
 
     // 예약 참가
     @Transactional
-    public CustomResponseDto joinReservation(String code, User auth) {
+    public CustomResponseDto joinReservation(User auth, String code) {
         User user =  userRepository.findByUserEmail(auth.getUsername())
                 .orElseThrow(() -> new UsernameNotFoundException(auth.getUsername() + "를 찾을 수 없습니다."));
         Reservation reservation = reservationRepository.findByCode(code)
@@ -195,4 +195,24 @@ public class ReservationService {
         );
         return new CustomResponseDto(200);
     }
+
+    // 얘약 참가 취소
+    public CustomResponseDto joinCancelReservation(User auth, String code) {
+        User user =  userRepository.findByUserEmail(auth.getUsername())
+                .orElseThrow(() -> new UsernameNotFoundException(auth.getUsername() + "를 찾을 수 없습니다."));
+        Reservation reservation = reservationRepository.findByCode(code)
+                .orElseThrow(() -> new IllegalArgumentException("예약을 찾을 수 없습니다: " + code));
+
+        ReservationMember reservationMember = reservationMemberRepository.findByReservationAndUser(reservation, user);
+
+        if (reservationMember.getStatus() == ReservationMemberStatus.CANCELLED) {
+            log.error("이미 취소된 예약입니다.");
+            return new CustomResponseDto(400);
+        }
+
+        reservationMember.cancelReservationMember();
+        return new CustomResponseDto(200);
+    }
+
+
 }

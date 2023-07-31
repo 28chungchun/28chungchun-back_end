@@ -48,4 +48,8 @@ public class ReservationMember {
         this.user = user;
         this.status = ReservationMemberStatus.CONFIRMED;
     }
+
+    public void cancelReservationMember(){
+        this.status = ReservationMemberStatus.CANCELLED;
+    }
 }

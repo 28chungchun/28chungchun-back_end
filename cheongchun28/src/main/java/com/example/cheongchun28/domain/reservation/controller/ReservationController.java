@@ -43,6 +43,7 @@ public class ReservationController {
     @GetMapping("/{reservationCode}")
     //예약 건당 조회하기(Read/Get) - (하나에 대한)
     public ReservationResponseDto.ReservationGetOneResponseDto getedReservation(@PathVariable("reservationCode") String code) {
+        log.info("reservation get, code: {}", code);
         return reservationService.getReservation(code);
     }
 
@@ -55,8 +56,7 @@ public class ReservationController {
         log.info("reservation delete, reservationcode: {}, auth: {}", code, auth.getUsername());
 
 
-        CustomResponseDto customResponseDto = reservationService.deleteReservation(auth, code);
-        return ResponseEntity.ok(customResponseDto);
+        return ResponseEntity.ok(reservationService.deleteReservation(auth, code));
 
     }
 
@@ -67,8 +67,7 @@ public class ReservationController {
                                                                @RequestBody ReservationRequestDto.UpdateReservationDto updateReservationDto) {
         log.info("reservation update,  auth: {},  updateReservation: {}, reservationCode: {}", auth, updateReservationDto, code);
 
-        CustomResponseDto customResponseDto = reservationService.updateReservation(auth, code, updateReservationDto);
-        return ResponseEntity.ok(customResponseDto);
+        return ResponseEntity.ok(reservationService.updateReservation(auth, code, updateReservationDto));
     }
 
 
@@ -76,9 +75,17 @@ public class ReservationController {
     @PostMapping("/entrant/{reservationCode}")
     public ResponseEntity<CustomResponseDto> joinReservation(@AuthenticationPrincipal User auth,
                                                              @PathVariable("reservationCode") String code) {
-        CustomResponseDto customResponseDto = reservationService.joinReservation(code, auth);
-        return ResponseEntity.ok(customResponseDto);
+        log.info("reservation join,  auth: {}, reservationCode: {}", auth.getUsername(), code);
+        return ResponseEntity.ok(reservationService.joinReservation(auth, code));
 
+    }
+
+    // 예약 참가 취소
+    @DeleteMapping("/entrant/{reservationCode}")
+    public ResponseEntity<CustomResponseDto>  joinCancelReservation(@AuthenticationPrincipal User auth,
+                                                                    @PathVariable("reservationCode") String code){
+        log.info("reservation joinCancel,  auth: {}, reservationCode: {}", auth.getUsername(), code);
+        return ResponseEntity.ok(reservationService.joinCancelReservation(auth, code));
     }
 
 }

@@ -29,12 +29,12 @@ public class Room {
     private String className;
 
     @Column(name = "bimproject")
-    private int bimProject;
+    private boolean bimProject;
 
     @Column(name = "computer")
-    private int computer;
+    private boolean computer;
     @Column(name = "blackboard")
-    private int blackBoard;
+    private boolean blackBoard;
 
     @Column(name = "capacity")
     private int capacity;

@@ -69,9 +69,7 @@ public class Reservation {
 //    }
 
     private String createReservationCoder() {
-        RandomString rs = new RandomString();
-        String reservationCode = rs.make(8);
-        return reservationCode;
+        return RandomString.make(8);
     }
 
     @Builder
