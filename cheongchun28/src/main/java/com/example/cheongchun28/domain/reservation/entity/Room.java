@@ -1,7 +1,6 @@
 package com.example.cheongchun28.domain.reservation.entity;
 
 
-import com.example.cheongchun28.domain.reservation.repository.ReservationRepository;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.AccessLevel;
 import lombok.Getter;
@@ -11,8 +10,6 @@ import javax.persistence.*;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Map;
-import java.util.Objects;
 
 @Table(name = "T_class")
 @Getter

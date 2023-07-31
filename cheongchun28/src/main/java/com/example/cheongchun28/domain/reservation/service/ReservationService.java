@@ -111,6 +111,10 @@ public class ReservationService {
             Reservation reservation = reservationRepository.findByCode(code)
                     .orElseThrow(() -> new IllegalArgumentException(code + "를 찾을 수 없습니다."));
 
+            if (isRoomAlreadyReserved(reservation.getRoom(), updateReservationDto.getStartDate(), updateReservationDto.getEndDate())) {
+                log.error("동일한 방 예약 중복");
+                return new CustomResponseDto(400);
+            }
 
             if (updateReservationDto.isValid()) {
                 reservation.updateReservation(updateReservationDto);
@@ -165,6 +169,14 @@ public class ReservationService {
         Reservation reservation = reservationRepository.findByCode(code)
                 .orElseThrow(() -> new IllegalArgumentException(code + "를 찾을 수 없습니다."));
         reservation.deleteReservation();
+
+        List<ReservationMember> reservationMember = reservationMemberRepository.findByReservation(ReservationMemberStatus.CONFIRMED, reservation.getId());
+        if (reservationMember != null) {
+            for (ReservationMember member : reservationMember) {
+                member.cancelReservationMember();
+                reservationMemberRepository.save(member);
+            }
+        }
         reservationRepository.save(reservation);
         return new CustomResponseDto(200);
     }
@@ -183,7 +195,7 @@ public class ReservationService {
         }
 
         ReservationMember existingReservationMember = reservationMemberRepository.findByReservationAndUser(reservation, user);
-        if (existingReservationMember != null) {
+        if (existingReservationMember != null && existingReservationMember.getStatus() == ReservationMemberStatus.CONFIRMED) {
             log.error("이미 참여중인 회원입니다.");
             return new CustomResponseDto(400);
         }
@@ -211,6 +223,7 @@ public class ReservationService {
         }
 
         reservationMember.cancelReservationMember();
+        reservationMemberRepository.save(reservationMember);
         return new CustomResponseDto(200);
     }
 
