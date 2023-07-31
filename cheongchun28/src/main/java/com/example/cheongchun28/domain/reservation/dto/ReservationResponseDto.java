@@ -19,10 +19,11 @@ public class ReservationResponseDto { // 예약 응답 Dto
 
         private int statusCode; // 예약 성공 실패 여부
 
-        public ReservationCreateResponseDto(int statusCode){
+        public ReservationCreateResponseDto(int statusCode) {
             this.statusCode = statusCode;
         }
     }
+
     @Getter
     @Setter
     public static class ReservationGetResponseDto { // 예약 조회에 대한 응답값
@@ -86,6 +87,7 @@ public class ReservationResponseDto { // 예약 응답 Dto
             this.status = status;
             this.statusCode = statusCode;
         }
+
         public ReservationDeleteResponseDto(boolean b, String s) {
         }
     }

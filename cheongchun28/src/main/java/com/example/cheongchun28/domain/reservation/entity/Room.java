@@ -11,7 +11,7 @@ import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 
-@Table(name = "T_class")
+@Table(name = "T_CLASS")
 @Getter
 @Entity
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
@@ -19,21 +19,22 @@ public class Room {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "class_sequence_id")
+    @Column(name = "CLASS_SEQUENCE_ID")
     private Long id;
 
-    @Column(name = "classname")
+    @Column(name = "CLASSNAME")
     private String className;
 
-    @Column(name = "bimproject")
+    @Column(name = "BIMPROJECT")
     private boolean bimProject;
 
-    @Column(name = "computer")
+    @Column(name = "COMPUTER")
     private boolean computer;
-    @Column(name = "blackboard")
+
+    @Column(name = "BLACKBOARD")
     private boolean blackBoard;
 
-    @Column(name = "capacity")
+    @Column(name = "CAPACITY")
     private int capacity;
 
     @JsonIgnore

@@ -142,7 +142,7 @@ public class ReservationService {
                 .orElseThrow(() -> new UsernameNotFoundException(auth.getUsername() + "를 찾을 수 없습니다."));
         Reservation reservation = reservationRepository.findWaitingReservationByEmail(user.getUserEmail());
         //아이디를 가지고 예약 번호를 찾는다.
-        return  new ReservationResponseDto.ReservationGetResponseDto(200, reservation.getCode());
+        return new ReservationResponseDto.ReservationGetResponseDto(200, reservation.getCode());
     }
 
     // 예약 조회 서비스 (하나씩)
@@ -184,7 +184,7 @@ public class ReservationService {
     // 예약 참가
     @Transactional
     public CustomResponseDto joinReservation(User auth, String code) {
-        User user =  userRepository.findByUserEmail(auth.getUsername())
+        User user = userRepository.findByUserEmail(auth.getUsername())
                 .orElseThrow(() -> new UsernameNotFoundException(auth.getUsername() + "를 찾을 수 없습니다."));
         Reservation reservation = reservationRepository.findByCode(code)
                 .orElseThrow(() -> new IllegalArgumentException("예약을 찾을 수 없습니다: " + code));
@@ -210,7 +210,7 @@ public class ReservationService {
 
     // 얘약 참가 취소
     public CustomResponseDto joinCancelReservation(User auth, String code) {
-        User user =  userRepository.findByUserEmail(auth.getUsername())
+        User user = userRepository.findByUserEmail(auth.getUsername())
                 .orElseThrow(() -> new UsernameNotFoundException(auth.getUsername() + "를 찾을 수 없습니다."));
         Reservation reservation = reservationRepository.findByCode(code)
                 .orElseThrow(() -> new IllegalArgumentException("예약을 찾을 수 없습니다: " + code));

@@ -10,7 +10,7 @@ import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
 
-@Table(name = "t_reservation_member")
+@Table(name = "T_RESERVATION_MEMBER")
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 @Getter
 @Entity
@@ -18,26 +18,26 @@ public class ReservationMember {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "reservation_member_sequence_id")
+    @Column(name = "RESERVATION_MEMBER_SEQUENCE_ID")
     private Long id;
 
     @JsonIgnore
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "reservation_sequence_id")
+    @JoinColumn(name = "RESERVATION_SEQUENCE_ID")
     private Reservation reservation;
 
     @JsonIgnore
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "user_sequence_id")
+    @JoinColumn(name = "USER_SEQUENCE_ID")
     private User user;
 
 
-    @Column(name = "status")
+    @Column(name = "STATUS")
     @Enumerated(EnumType.ORDINAL)
     private ReservationMemberStatus status;
 
 
-    @Column(name = "is_invitor")
+    @Column(name = "IS_INVITOR")
     private String isInvitor; // 방장인지 아닌지
 
 

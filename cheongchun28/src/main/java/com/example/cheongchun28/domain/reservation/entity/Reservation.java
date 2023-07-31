@@ -16,7 +16,7 @@ import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 import javax.persistence.*;
 import java.time.LocalDateTime;
 
-@Table(name = "t_reservation")
+@Table(name = "T_RESERVATION")
 @Getter
 @Entity
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
@@ -25,43 +25,43 @@ public class Reservation {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "reservation_sequence_id")
+    @Column(name = "RESERVATION_SEQUENCE_ID")
     private Long id;
 
 
     @JsonIgnore
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "class_sequence_id", nullable = false)
+    @JoinColumn(name = "CLASS_SEQUENCE_ID", nullable = false)
     private Room room;
 
     @JsonIgnore
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "user_sequence_id", nullable = false)
+    @JoinColumn(name = "USER_SEQUENCE_ID", nullable = false)
     private User user;
 
     @CreatedDate
-    @Column(name = "created_at", updatable = false)
+    @Column(name = "CREATED_AT", updatable = false)
     private LocalDateTime createdAt;
 
     @LastModifiedDate
-    @Column(name = "modified_at")
+    @Column(name = "MODIFIED_AT")
     private LocalDateTime modifiedAt;
 
-    @Column(name = "start_time", nullable = false)
+    @Column(name = "START_TIME", nullable = false)
     private LocalDateTime startDate;
 
-    @Column(name = "end_time", nullable = false)
+    @Column(name = "END_TIME", nullable = false)
     private LocalDateTime endDate;
 
-    @Column(name = "status", nullable = false)
+    @Column(name = "STATUS", nullable = false)
     @Enumerated(EnumType.ORDINAL)
     private ReservationStatus status;
 
 
-    @Column(name = "topic", nullable = false)
+    @Column(name = "TOPIC", nullable = false)
     private String topic;
 
-    @Column(name = "reservation_code", unique = true, nullable = false)
+    @Column(name = "RESERVATION_CODE", unique = true, nullable = false)
     private String code;
 
 //    public String generateCode() {

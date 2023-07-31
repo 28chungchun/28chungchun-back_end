@@ -11,6 +11,7 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.web.bind.annotation.*;
+
 import javax.validation.Valid;
 
 @Slf4j
@@ -41,17 +42,16 @@ public class ReservationController {
     @GetMapping("/{reservationCode}")
     //예약 건당 조회하기(Read/Get) - (하나에 대한)
     public ReservationResponseDto.ReservationGetOneResponseDto getedReservation(@PathVariable("reservationCode") String code) {
-        log.info("reservation get, code: {}", code);
+        log.info("reservation get, reservationCode: {}", code);
         return reservationService.getReservation(code);
     }
-
 
 
     // 예약 삭제
     @DeleteMapping("/{reservationCode}")
     public ResponseEntity<CustomResponseDto> deleteReservation(@AuthenticationPrincipal User auth,
                                                                @PathVariable("reservationCode") String code) {
-        log.info("reservation delete, reservationcode: {}, auth: {}", code, auth.getUsername());
+        log.info("reservation delete, auth: {}, reservationCode: {}", auth.getUsername(), code);
 
 
         return ResponseEntity.ok(reservationService.deleteReservation(auth, code));
@@ -80,8 +80,8 @@ public class ReservationController {
 
     // 예약 참가 취소
     @DeleteMapping("/entrant/{reservationCode}")
-    public ResponseEntity<CustomResponseDto>  joinCancelReservation(@AuthenticationPrincipal User auth,
-                                                                    @PathVariable("reservationCode") String code){
+    public ResponseEntity<CustomResponseDto> joinCancelReservation(@AuthenticationPrincipal User auth,
+                                                                   @PathVariable("reservationCode") String code) {
         log.info("reservation joinCancel,  auth: {}, reservationCode: {}", auth.getUsername(), code);
         return ResponseEntity.ok(reservationService.joinCancelReservation(auth, code));
     }
