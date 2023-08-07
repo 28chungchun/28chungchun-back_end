@@ -33,7 +33,7 @@ public class ReservationMember {
 
 
     @Column(name = "STATUS")
-    private boolean status;
+    private boolean status; // 참가 상태
 
 
     @Column(name = "IS_INVITOR")
@@ -47,12 +47,12 @@ public class ReservationMember {
         this.reservation = reservation;
         this.user = user;
         this.status = false;
-        this.attendance = true;
+        this.attendance = false;
     }
 
     public void cancelReservationMember(){
         this.status = true;
     }
 
-    public void checkOutReservationMember() { this.attendance = false; }
+    public void checkOutReservationMember() { this.attendance = true; }
 }
