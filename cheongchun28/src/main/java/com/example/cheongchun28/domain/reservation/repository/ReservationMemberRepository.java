@@ -13,10 +13,9 @@ import java.util.List;
 import java.util.Optional;
 
 @Repository
-
 public interface ReservationMemberRepository extends JpaRepository<ReservationMember, Long> {
 
-    @Query("SELECT rm FROM ReservationMember rm WHERE rm.user.id = :userId AND (" +
+    @Query("SELECT rm FROM ReservationMember rm WHERE rm.user.userEmail = :userId AND (" +
             "(:startDate BETWEEN rm.reservation.startDate AND rm.reservation.endDate) OR " +
             "(:endDate BETWEEN rm.reservation.startDate AND rm.reservation.endDate) OR " +
             "(rm.reservation.startDate BETWEEN :startDate AND :endDate))")

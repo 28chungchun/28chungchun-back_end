@@ -30,9 +30,9 @@ public class UserService {
 
     public CustomResponseDto signup(UserDto.SignupRequestDto requestDto) {
 
-        if (requestDto.getEmpNumber().equals("")) {
-
-        }
+//        if (requestDto.getEmpNumber().equals("")) {
+//
+//        }
 
         userRepository.save(requestDto.toEntity(bcryptPasswordEncoder.encode(requestDto.getPassword())));
         return new CustomResponseDto(200);

@@ -40,6 +40,6 @@ public class MyPageDto {
         private LocalDateTime startDate;
         private LocalDateTime endDate;
         private ReservationStatus status;
-        private String code;
+        private String ReservationCode;
     }
 }

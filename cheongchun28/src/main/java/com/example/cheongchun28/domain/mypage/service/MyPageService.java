@@ -82,7 +82,7 @@ public class MyPageService {
                 responseDto.setStartDate(reservation.getStartDate());
                 responseDto.setEndDate(reservation.getEndDate());
                 responseDto.setStatus(reservation.getStatus());
-                responseDto.setCode(reservation.getCode());
+                responseDto.setReservationCode(reservation.getCode());
 
                 responseDtos.add(responseDto);
             }

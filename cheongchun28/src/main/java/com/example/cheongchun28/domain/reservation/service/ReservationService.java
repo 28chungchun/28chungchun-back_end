@@ -43,6 +43,7 @@ public class ReservationService {
             User user = userRepository.findByUserEmail(auth.getUsername())
                     .orElseThrow(() -> new UsernameNotFoundException(auth.getUsername() + "를 찾을 수 없습니다."));
             log.info("user: {}", user);
+            log.info("1startDate:{}, endDate:{}, roomName:{}, topic:{}", createReservationDto.getStartDate(), createReservationDto.getEndDate(), createReservationDto.getRoomName(), createReservationDto.getTopic());
             Room room = roomRepository.findByRoomName(createReservationDto.getRoomName())
                     .orElseThrow(() -> new IllegalArgumentException(createReservationDto.getRoomName() + "를 찾을 수 없습니다."));
 //             방 예약 및 다른 예약 존재 체크
@@ -55,35 +56,40 @@ public class ReservationService {
                 log.error("동일한 방 예약 중복");
                 return new CustomResponseDto(400);
             }
-            List<Reservation> completedOrCancelledReservations = reservationRepository.findByUserAndStatusIn(user.getUserSequenceId(), List.of(ReservationStatus.CANCELLED, ReservationStatus.COMPLETED));
-            if (doesOverlapWithReservations(completedOrCancelledReservations, createReservationDto.getStartDate(), createReservationDto.getEndDate())) {
-                log.error("예약하려는 회원님의 이전에 완료된 예약이 겹칩니다.");
-                return new CustomResponseDto(400);
-            }
+            log.info("2startDate:{}, endDate:{}, roomName:{}, topic:{}", createReservationDto.getStartDate(), createReservationDto.getEndDate(), createReservationDto.getRoomName(), createReservationDto.getTopic());
+//            List<Reservation> completedOrCancelledReservations = reservationRepository.findByUserAndStatusIn(user.getUserSequenceId(), List.of(ReservationStatus.CANCELLED, ReservationStatus.COMPLETED));
+//            if (doesOverlapWithReservations(completedOrCancelledReservations, createReservationDto.getStartDate(), createReservationDto.getEndDate())) {
+//                log.error("예약하려는 회원님의 이전에 완료된 예약이 겹칩니다.");
+//                return new CustomResponseDto(400);
+//            }
+            log.info("3startDate:{}, endDate:{}, roomName:{}, topic:{}", createReservationDto.getStartDate(), createReservationDto.getEndDate(), createReservationDto.getRoomName(), createReservationDto.getTopic());
 
             // 참여 중인 회원의 중복 예약 확인
-            List<ReservationMember> overlappingReservationsByUser = reservationMemberRepository.findOverlappingReservationsByUser(user.getUserSequenceId(), createReservationDto.getStartDate(), createReservationDto.getEndDate());
-            if (!overlappingReservationsByUser.isEmpty()) {
-                log.error("회원님이 참여 중인 다른 예약이 겹칩니다.");
-                return new CustomResponseDto(400);
-            }
+//            List<ReservationMember> overlappingReservationsByUser = reservationMemberRepository.findOverlappingReservationsByUser(user.getUserSequenceId(), createReservationDto.getStartDate(), createReservationDto.getEndDate());
+//            if (!overlappingReservationsByUser.isEmpty()) {
+//                log.error("회원님이 참여 중인 다른 예약이 겹칩니다.");
+//                return new CustomResponseDto(400);
+//            }
+            log.info("4startDate:{}, endDate:{}, roomName:{}, topic:{}", createReservationDto.getStartDate(), createReservationDto.getEndDate(), createReservationDto.getRoomName(), createReservationDto.getTopic());
             // 다른 예약 체크
             if (doesUserTimeOverlap(user, createReservationDto.getStartDate(), createReservationDto.getEndDate())) {
                 log.error("사용자 예약 중복");
                 return new CustomResponseDto(400);
             }
+            log.info("5startDate:{}, endDate:{}, roomName:{}, topic:{}", createReservationDto.getStartDate(), createReservationDto.getEndDate(), createReservationDto.getRoomName(), createReservationDto.getTopic());
             // 예약 체크
             if (hasInProgressReservation(user)) {
                 log.error("이미 예약을 잡은 회원입니다.");
                 return new CustomResponseDto(400);
             }
+            log.info("6startDate:{}, endDate:{}, roomName:{}, topic:{}", createReservationDto.getStartDate(), createReservationDto.getEndDate(), createReservationDto.getRoomName(), createReservationDto.getTopic());
             // 예약 시간 중복 체크
             List<Reservation> overlappingReservations = reservationRepository.findOverlappingReservations(createReservationDto.getRoomName(), createReservationDto.getStartDate(), createReservationDto.getEndDate());
             if (!overlappingReservations.isEmpty()) {
                 log.error("예약 시간 중복입니다.");
                 return new CustomResponseDto(400);
             }
-
+            log.info("7startDate:{}, endDate:{}, roomName:{}, topic:{}", createReservationDto.getStartDate(), createReservationDto.getEndDate(), createReservationDto.getRoomName(), createReservationDto.getTopic());
             // 예약 시간간격 체크
             if (isValid(createReservationDto.getStartDate(), createReservationDto.getEndDate())) {
                 Reservation reservation = reservationRepository.save(createReservationDto.toEntity(room, user));

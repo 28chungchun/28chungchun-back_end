@@ -1,9 +1,7 @@
 package com.example.cheongchun28.domain.reservation.repository;
 
 import com.example.cheongchun28.domain.reservation.entity.Reservation;
-import com.example.cheongchun28.domain.reservation.entity.ReservationMember;
 import com.example.cheongchun28.domain.reservation.entity.ReservationStatus;
-import com.example.cheongchun28.domain.reservation.entity.Room;
 import com.example.cheongchun28.domain.user.entity.User;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
@@ -23,7 +21,7 @@ public interface ReservationRepository extends JpaRepository<Reservation, Long> 
             "(r.startDate BETWEEN :startDate AND :endDate))")
     List<Reservation> findOverlappingReservations(@Param("className") String className, @Param("startDate") LocalDateTime startDate, @Param("endDate") LocalDateTime endDate);
 
-    @Query("SELECT r FROM Reservation r WHERE r.user.id = :userId AND r.status IN :statuses")
+    @Query("SELECT r FROM Reservation r WHERE r.user.userEmail = :userId AND r.status IN :statuses")
     List<Reservation> findByUserAndStatusIn(@Param("userId") Long userId, @Param("statuses") List<ReservationStatus> statuses);
 //    List<Reservation> findByUserAndStartDateBetweenAndEndDateBetweenAndStatusNot(user, startDate, endDate, startDate, endDate, ReservationStatus.CANCELLED User user, LocalDateTime startDate, LocalDateTime endDate, LocalDateTime date, LocalDateTime localDateTime, ReservationStatus cancelled);
 //
