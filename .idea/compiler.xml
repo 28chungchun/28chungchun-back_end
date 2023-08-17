@@ -10,5 +10,10 @@
         <module name="cheongchun28.main" />
       </profile>
     </annotationProcessing>
+    <bytecodeTargetLevel>
+      <module name="cheongchun28" target="11" />
+      <module name="cheongchun28.main" target="11" />
+      <module name="cheongchun28.test" target="11" />
+    </bytecodeTargetLevel>
   </component>
 </project>
