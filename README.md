@@ -1,11 +1,10 @@
-![waving](https://capsule-render.vercel.app/api?type=waving&height=200&text=이팔청춘&fontSize=50&fontAlign=50&color=gradient&animation=fadeIn&fontColor=FF2D1C)
+![waving](https://capsule-render.vercel.app/api?type=waving&height=200&text이팔청춘&fontSize=50&fontAlign=50&color=gradient&animation=fadeIn&fontColor=FF2D1C)
 
-# 이팔청(Back-End)
-> **당근 마켓 클론 코딩 프로젝트**  
-> 바니바니 당근마켓. 중고 거래, 이웃과 함께해요. 가깝고 따뜻한 당신의 근처를 만들어요.
+# 이팔청춘(Back-End)
+> **강의실 예약 서비스 프로젝트**  
+> 천재교육의 빈 강의실을 예약하여 팀원들끼리의 회의 및 학생 강의실로 사용해 보세요!
 
-* [[Notion: 바니바니당근 프로젝트 정보]](https://royal-storm-069.notion.site/6-21181e915241465c92495075706dbe3c)
-* [[프로젝트 시연영상 보러가기]](https://www.youtube.com/watch?v=5vryOylmYbc)
+* [[Notion: 이팔청춘 프로젝트 정보]](https://royal-storm-069.notion.site/6-21181e915241465c92495075706dbe3c)
 * [[Front-End Repository]](https://github.com/banibani-banibani-danggeun-danggeun/FE_new)  
   
 ## 📆 개발 기간  
@@ -37,17 +36,20 @@
 |Server|<img src="https://img.shields.io/badge/Amazon EC2-FF9900?style=flat-square&logo=Amazon EC2&logoColor=white"/>  
 
 ## 📌 API 명세서 (노션 페이지에서 선명하게 조회 가능)
-<img width="800" alt="api1" src="https://blog.kakaocdn.net/dn/bYcpJq/btrUViSu5V3/RLAlJCsvfkKqYZk5izKQL0/img.png">  
-<img width="800" alt="api2" src="https://blog.kakaocdn.net/dn/bQMZMc/btrUV4NhRnu/bVkcjh31Tv5V0VHYe8RXx1/img.png">  
-<img width="800" alt="api3" src="https://blog.kakaocdn.net/dn/EzZHZ/btrUTJbNH97/Ry7iBWzelmvDX3U8rUxmC1/img.png">  
-<img width="800" alt="api3" src="https://blog.kakaocdn.net/dn/EifTa/btrUVbFUujz/8KdMujorfyUhy87XI5i3x1/img.png">
+<img width="800" alt="api1" src="https://files.slack.com/files-pri/T05C5VC0FBR-F05SRN2N2R1/image.png">  
+<img width="800" alt="api2" src="https://files.slack.com/files-pri/T05C5VC0FBR-F05SU8S9XGC/image.png">  
+<img width="800" alt="api3" src="https://files.slack.com/files-pri/T05C5VC0FBR-F05SU8TFFT6/image.png">  
+<img width="800" alt="api3" src="https://files.slack.com/files-pri/T05C5VC0FBR-F05SNTBKZ9B/image.png">
+<img width="800" alt="api3" src="https://files.slack.com/files-pri/T05C5VC0FBR-F05SNTDAJ93/image.png">
+<img width="800" alt="api3" src="https://files.slack.com/files-pri/T05C5VC0FBR-F05TEQYNV3J/image.png">
+<img width="800" alt="api3" src="https://files.slack.com/files-pri/T05C5VC0FBR-F05TEQZN9SL/image.png">
 
 ## 📏 와이어프레임
 
-![와이어프레임](https://cdn.discordapp.com/attachments/1037267111585792020/1055867403344543754/IMB_XZKGyK.gif)
+![와이어프레임](https://www.figma.com/file/nhzZR1imogkKmuIcQ0gOcE/%EC%9B%B9%EC%82%AC%EC%9D%B4%ED%8A%B8-%EA%B5%AC%EC%B6%95-%ED%94%84%EB%A1%9C%EC%A0%9D%ED%8A%B8---%EC%8A%A4%ED%86%A0%EB%A6%AC%EB%B3%B4%EB%93%9C?type=design&node-id=0%3A1&mode=design&t=WaiUzFr1ydQrc5IG-1)
 
 ## 🗺 ERD
-<img width="800" alt="메인페이지2" src="https://blog.kakaocdn.net/dn/bxKbco/btrUWSToS9W/vQC2owz9mExVJ6mb75lXpK/img.png">  
+<img width="800" alt="메인페이지2" src="https://files.slack.com/files-pri/T05C5VC0FBR-F05SK6LQ154/image.png">  
 
 ## 🧩아키텍쳐
 <img width="800" alt="메인페이지2" src="https://files.slack.com/files-pri/T05C5VC0FBR-F05MYBWB4R3/download/image.png?origin_team=T05C5VC0FBR">  
